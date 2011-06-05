@@ -1,0 +1,4 @@
+Tile.js Generator
+
+A drawing tool which allows you to draw a tile and
+get the JS code to generate it on a HTML5 2d context.
