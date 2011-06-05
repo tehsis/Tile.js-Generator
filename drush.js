@@ -5,6 +5,7 @@
         form = document.getElementById('generateForm')
     ;
 	
+	// Draws the grid.
 	for (var y=0; y<=canvas.height || y<=canvas.width; y+=10) {
 	    context.moveTo(0, y);
 	    context.lineTo(canvas.width, y);
@@ -14,7 +15,7 @@
 	    context.strokeStyle = "#eae6e6";
 	    context.stroke();
 	}	
-    
+    //---------------------------------------------------------
 	
 	var Dot = Base.extend({
 		  constructor: function(x, y, width, height) {
@@ -87,7 +88,11 @@
 	function onMouseClick(evt) {
 	  var xBase = canvas.offsetLeft;
 	  var yBase = canvas.offsetTop;
-	  dot = new Dot(evt.clientX-xBase, evt.clientY-yBase, 10, 10);
+	  var x = evt.clientX-xBase;
+	  var y = evt.clientY-yBase;
+	  x = Math.floor(x/10) * 10;
+	  y = Math.floor(y/10) * 10;
+	  dot = new Dot(x, y, 10, 10);
 	  dot.draw(context);
 	  virtualCanvas.drawDot(dot);
 	}
