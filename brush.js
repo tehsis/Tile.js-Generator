@@ -1,20 +1,22 @@
 (function (window) {
-    var Dot = brush.classes.Dot;
+	var Dot = brush.classes.Dot;
 	var Canvas = brush.classes.Canvas;	
 	var document = window.document,
         canvas = document.getElementById('brush'),
         context = canvas.getContext('2d'),
-        form = document.getElementById('generateForm')
+        form = document.getElementById('generateForm'),
+        gridCanvas = document.getElementById('grid');
+	    gridContext = gridCanvas.getContext('2d');
     ;	
 	// Draws the grid.
 	for (var y=0; y<=canvas.height || y<=canvas.width; y+=10) {
-	    context.moveTo(0, y);
-	    context.lineTo(canvas.width, y);
-	    context.moveTo(y, 0);
-	    context.lineTo(y, canvas.height);
-	    context.lineWidth = 1;
-	    context.strokeStyle = "#eae6e6";
-	    context.stroke();
+	    gridContext.moveTo(0, y);
+	    gridContext.lineTo(canvas.width, y);
+	    gridContext.moveTo(y, 0);
+	    gridContext.lineTo(y, canvas.height);
+	    gridContext.lineWidth = 1;
+	    gridContext.strokeStyle = "#eae6e6";
+	    gridContext.stroke();
 	}	
     //---------------------------------------------------------	
 	var virtualCanvas = new Canvas(640, 480);
