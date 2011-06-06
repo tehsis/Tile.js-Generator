@@ -25,10 +25,14 @@
 	form.generate.addEventListener('click', onGenerate, false);
 	
 	function onGenerate(evt) {
-	  form = evt.originalTarget.form;
-	  code = document.createElement('textarea');
-	  code.cols = 50;
-	  code.rows = 10;
+	  form = evt.target.form;
+	  code = document.getElementById('generateArea');
+	  if (!code) {
+	    code = document.createElement('textarea');
+	    code.id = 'generateArea';
+	    code.cols = 50;
+	    code.rows = 10;
+	  }
 	  code.value = virtualCanvas.getCode();
 	  form.appendChild(code);
 	}
@@ -37,8 +41,8 @@
 	  var dot;
 	  var xBase = canvas.offsetLeft;
 	  var yBase = canvas.offsetTop;
-	  var x = evt.clientX-xBase;
-	  var y = evt.clientY-yBase;
+	  var x = evt.clientX-xBase+window.scrollX;
+	  var y = evt.clientY-yBase+window.scrollY;
 	  x = Math.floor(x/10) * 10;
 	  y = Math.floor(y/10) * 10;
 	  dot = new Dot(x, y, 10, 10);
