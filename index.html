@@ -3,12 +3,21 @@
 </head>
 <body>
   <h1>Tile generator for JS</h1>
-  <canvas id="drush" width="640" height="480">
-  </canvas>
-  <form id="generateForm"> 
-    <input type="button" value="Generate code" name="generate"/>
-  </form>
+  <div id="container" style="height: 480px;">
+    <div id="canvases">
+      <canvas id="grid" width="640" height="480" style="position: absolute;">
+      </canvas>
+      <canvas id="brush" width="640" height="480" style="position: absolute;">
+      </canvas>
+    </div>
+  </div>
+   <div id="form">
+      <form id="generateForm"> 
+        <input type="button" value="Generate code" name="generate"/>
+      </form>
+    </div>
 </body>
    <script type="text/javascript" src="ext/Base.js"></script>
-   <script type="text/javascript" src="drush.js"></script>
+   <script type="text/javascript" src="brush-classes.js"></script>
+   <script type="text/javascript" src="brush.js"></script>
 </html>
