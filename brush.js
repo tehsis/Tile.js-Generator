@@ -1,14 +1,11 @@
 (function (window) {
-    
-	Dot = brush.classes.Dot;
-	Canvas = brush.classes.Canvas;
-	
+    var Dot = brush.classes.Dot;
+	var Canvas = brush.classes.Canvas;	
 	var document = window.document,
         canvas = document.getElementById('brush'),
         context = canvas.getContext('2d'),
         form = document.getElementById('generateForm')
-    ;
-	
+    ;	
 	// Draws the grid.
 	for (var y=0; y<=canvas.height || y<=canvas.width; y+=10) {
 	    context.moveTo(0, y);
@@ -19,10 +16,7 @@
 	    context.strokeStyle = "#eae6e6";
 	    context.stroke();
 	}	
-    //---------------------------------------------------------
-	
-	
-	
+    //---------------------------------------------------------	
 	var virtualCanvas = new Canvas(640, 480);
 	canvas.addEventListener('click', onMouseClick, false);
 	
@@ -38,6 +32,7 @@
 	}
 	
 	function onMouseClick(evt) {
+	  var dot;
 	  var xBase = canvas.offsetLeft;
 	  var yBase = canvas.offsetTop;
 	  var x = evt.clientX-xBase;
@@ -45,10 +40,10 @@
 	  x = Math.floor(x/10) * 10;
 	  y = Math.floor(y/10) * 10;
 	  dot = new Dot(x, y, 10, 10);
-	  dot.draw(context);
-	  virtualCanvas.drawDot(dot);
-	}
-	
-	
-	
+	  if (virtualCanvas.drawDot(dot)) {
+	    dot.draw(context);
+	  } else {
+	    dot.clear(context);
+	  }
+	}	
 }) (window);

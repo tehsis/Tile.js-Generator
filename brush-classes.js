@@ -15,6 +15,9 @@ vcl.classes = {
 		  draw: function(context) {
 		    context.fillRect(this.x, this.y, this.width, this.height);    
 		  },
+		  clear: function(context) {
+		    context.clearRect(this.x, this.y, this.width, this.height);  
+		  },
 		  code: function() {
 		    var code = "fillRect(" 
 		    	+ this.x + ", " 
@@ -35,15 +38,19 @@ vcl.classes = {
 		
 	    drawDot: function(dot) {
 	      var insert = true;
-	      for (var i = 0; i<this.dots.length; i++) {
-	        if (this.dots[i].x == dot.x && this.dots[i].y == dot.y) {
+	      var i; 
+	      for (i = 0; i<this.dots.length; i++) {
+	        if (this.dots[i].x === dot.x && this.dots[i].y === dot.y) {
 	          insert = false;
 	          break;
 	        }   	  
 	      }
 	      if (insert) {
 	        this.dots.push(dot);
-	      }
+	      } else {
+	        this.dots.splice(i,1);   	  
+	      }	      
+	      return insert;
 	    },
 	    
 	    getCode: function() {
