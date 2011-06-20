@@ -18,12 +18,12 @@ vcl.classes = {
 		  clear: function(context) {
 		    context.clearRect(this.x, this.y, this.width, this.height);  
 		  },
-		  code: function() {
+		  code: function(size) {
 		    var code = "fillRect(" 
-		    	+ this.x + ", " 
-		    	+ this.y + ", "
-		    	+ this.width + ", "
-		    	+ this.height
+		    	+ (this.x / size) + ", " 
+		    	+ (this.y / size) + ", "
+		    	+ (this.width / size) + ", "
+		    	+ (this.height / size)
 		    	+ ");";
 		    return code;
 		  }
@@ -53,11 +53,11 @@ vcl.classes = {
 	      return insert;
 	    },
 	    
-	    getCode: function() {
+	    getCode: function(size) {
 	       var code = "function (context, x, y) {\n";
 	       code += "  context.translate(x, y); \n";
 	       for(var i=0; i<this.dots.length;i++) {
-	         code += "  " + "context." + this.dots[i].code();
+	         code += "  " + "context." + this.dots[i].code(size);
 	         code += "\n";
 	       };
 	       code += "}";

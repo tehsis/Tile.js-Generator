@@ -13,7 +13,15 @@
   </div>
    <div id="form">
       <form id="generateForm"> 
-        <input type="button" value="Generate code" name="generate"/>
+        <input type="number"
+          placeholder="Number of times you want to reduce the drawing" 
+          min = "1"
+          max = "10"
+          step= "1"
+          name = "dotSize">
+        <input type="button" 
+        value="Generate code" 
+        name="generate"/>
       </form>
     </div>
 </body>

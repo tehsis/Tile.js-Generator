@@ -9,20 +9,18 @@
 	    gridContext = gridCanvas.getContext('2d');
     ;	
 	// Draws the grid.
-	for (var y=0; y<=canvas.height || y<=canvas.width; y+=10) {
-	    gridContext.moveTo(0, y);
-	    gridContext.lineTo(canvas.width, y);
-	    gridContext.moveTo(y, 0);
-	    gridContext.lineTo(y, canvas.height);
-	    gridContext.lineWidth = 1;
-	    gridContext.strokeStyle = "#eae6e6";
-	    gridContext.stroke();
-	}	
+    drawGrid(gridCanvas, 10);
     //---------------------------------------------------------	
 	var virtualCanvas = new Canvas(640, 480);
 	canvas.addEventListener('click', onMouseClick, false);
 	
+	form.dotSize.addEventListener('change', onDotSizeChange, false);
 	form.generate.addEventListener('click', onGenerate, false);
+	
+	function onDotSizeChange(evt) {
+	  form = evt.target.form;
+	  
+	}
 	
 	function onGenerate(evt) {
 	  form = evt.target.form;
@@ -33,8 +31,20 @@
 	    code.cols = 50;
 	    code.rows = 10;
 	  }
-	  code.value = virtualCanvas.getCode();
+	  code.value = virtualCanvas.getCode(form.dotSize.value);
 	  form.appendChild(code);
+	}
+	
+	function drawGrid(canvas, dotSize) {
+		for (var y=0; y<=canvas.height || y<=canvas.width; y+= dotSize) {
+		    gridContext.moveTo(0, y);
+		    gridContext.lineTo(canvas.width, y);
+		    gridContext.moveTo(y, 0);
+		    gridContext.lineTo(y, canvas.height);
+		    gridContext.lineWidth = 1;
+		    gridContext.strokeStyle = "#eae6e6";
+		    gridContext.stroke();
+		}		
 	}
 	
 	function onMouseClick(evt) {
