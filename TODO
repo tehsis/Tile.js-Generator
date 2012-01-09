@@ -1,0 +1,6 @@
+ - Add a palette to switch between diferents figures.
+   - Circle
+   - Square
+   - line
+ - Export draw to a file.
+ - Import draw from a file.
