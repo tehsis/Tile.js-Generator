@@ -1,5 +1,6 @@
 (function () {
   var vcl = {}; // A local virtual class
+
   vcl.figures = {	
     Dot:  Base.extend({
       constructor: function(x, y, width, height) {
@@ -31,7 +32,7 @@
       }
     }),
 
-    Canvas: Base.extend({
+    VirtualCanvas: Base.extend({
       constructor: function(width, height) {
         this.width = width;
         this.height = height;
@@ -67,5 +68,30 @@
       }
     })
   };
+
+  vcl.utils = {
+    Grid: Base.extend({
+      constructor: function(params) {
+        this.height = params.height;
+        this.width = params.width;
+        this.dotSize = params.dotSize;
+        this.canvas = params.canvas;
+        this.context = this.canvas.getContext('2d');
+      },
+   
+      draw: function() {
+       for (var y=0; y<=this.height || y<=this.width; y+= this.dotSize) {
+         this.context.moveTo(0, y);
+         this.context.lineTo(this.width, y);
+         this.context.moveTo(y, 0);
+         this.context.lineTo(y, this.height);
+         this.context.lineWidth = 1;
+         this.context.strokeStyle = "#eae6e6";
+         this.context.stroke();
+       };		
+      },
+    })
+  };
+
   window.brush = vcl;
 }) ();

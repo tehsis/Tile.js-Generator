@@ -1,14 +1,20 @@
 (function (window) {
    var Dot = brush.figures.Dot;
-   var Canvas = brush.figures.Canvas;	
+   var Canvas = brush.figures.VirtualCanvas;	
    var document = window.document,
    canvas = document.getElementById('brush'),
    context = canvas.getContext('2d'),
    form = document.getElementById('generateForm'),
+
    gridCanvas = document.getElementById('grid');
-   gridContext = gridCanvas.getContext('2d');
-   // Draws the grid.
-   drawGrid(gridCanvas, 10);
+   grid = new brush.utils.Grid({
+     height: canvas.height,
+     width: canvas.width,
+     dotSize: 10,
+     canvas: gridCanvas,
+   });
+   grid.draw();
+
    //---------------------------------------------------------	
    var virtualCanvas = new Canvas(640, 480);
    canvas.addEventListener('click', onMouseClick, false);
@@ -35,17 +41,7 @@
      form.appendChild(code);
    }
 
-   function drawGrid(canvas, dotSize) {
-     for (var y=0; y<=canvas.height || y<=canvas.width; y+= dotSize) {
-       gridContext.moveTo(0, y);
-       gridContext.lineTo(canvas.width, y);
-       gridContext.moveTo(y, 0);
-       gridContext.lineTo(y, canvas.height);
-       gridContext.lineWidth = 1;
-       gridContext.strokeStyle = "#eae6e6";
-       gridContext.stroke();
-     }		
-   }
+
 
    function onMouseClick(evt) {
      var dot;
