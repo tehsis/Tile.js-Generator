@@ -1,6 +1,6 @@
 (function (window) {
-   var Dot = brush.classes.Dot;
-   var Canvas = brush.classes.Canvas;	
+   var Dot = brush.figures.Dot;
+   var Canvas = brush.figures.Canvas;	
    var document = window.document,
    canvas = document.getElementById('brush'),
    context = canvas.getContext('2d'),

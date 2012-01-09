@@ -1,6 +1,6 @@
 (function () {
   var vcl = {}; // A local virtual class
-  vcl.classes = {	
+  vcl.figures = {	
     Dot:  Base.extend({
       constructor: function(x, y, width, height) {
         this.x = x;
