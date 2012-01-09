@@ -3,43 +3,47 @@
 
   vcl.figures = {	
     Dot:  Base.extend({
-      constructor: function(x, y, width, height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+      constructor: function(params) {
+        this.x = params.x;
+        this.y = params.y;
+        this.width = params.width;
+        this.height = params.height;
       },
 
       x: this.x,
       y: this.y,
 
-      draw: function(context) {
+      draw: function(params) {
+        context = params.context || params;
         context.fillRect(this.x, this.y, this.width, this.height);    
       },
 
-      clear: function(context) {
+      clear: function(params) {
+        context = params.context || params;
         context.clearRect(this.x, this.y, this.width, this.height);  
       },
 
-      code: function(size) {
+      code: function(params) {
+        size = params.size || params;
         var code = "fillRect("; 
-        code =+ (this.x / size) + ", "; 
-        code =+ (this.y / size) + ", ";
-        code =+ (this.width / size) + ", ";
-        code =+ (this.height / size);
-        code =+ ");";
+        code += (this.x / size) + ", "; 
+        code += (this.y / size) + ", ";
+        code += (this.width / size) + ", ";
+        code += (this.height / size);
+        code += ");";
         return code;
       }
     }),
 
     VirtualCanvas: Base.extend({
-      constructor: function(width, height) {
-        this.width = width;
-        this.height = height;
+      constructor: function(params) {
+        this.width = params.width;
+        this.height = params.height;
         this.dots = [];
       },
 
-      drawDot: function(dot) {
+      drawDot: function(params) {
+        dot = params.dot || params;
         var insert = true;
         var i; 
         for (i = 0; i<this.dots.length; i++) {
@@ -56,7 +60,8 @@
         return insert;
       },
 
-      getCode: function(size) {
+      getCode: function(params) {
+        size = params.size || params;
         var code = "function (context, x, y) {\n";
         code += "  context.translate(x, y); \n";
         for(var i=0; i<this.dots.length;i++) {

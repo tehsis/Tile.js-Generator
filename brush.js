@@ -16,7 +16,10 @@
    grid.draw();
 
    //---------------------------------------------------------	
-   var virtualCanvas = new Canvas(640, 480);
+   var virtualCanvas = new Canvas({
+     width: 640, 
+     height: 480,
+   });
    canvas.addEventListener('click', onMouseClick, false);
 
    form.dotSize.addEventListener('change', onDotSizeChange, false);
@@ -51,7 +54,12 @@
      var y = evt.clientY-yBase+window.scrollY;
      x = Math.floor(x/10) * 10;
      y = Math.floor(y/10) * 10;
-     dot = new Dot(x, y, 10, 10);
+     dot = new Dot({
+       x: x, 
+       y: y, 
+       width: 10, 
+       height: 10
+     });
      if (virtualCanvas.drawDot(dot)) { 
        dot.draw(context);
      } else {
