@@ -1,71 +1,71 @@
 (function () {
+  var vcl = {}; // A local virtual class
+  vcl.classes = {	
+    Dot:  Base.extend({
+      constructor: function(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+      },
 
-var vcl = {}; // A local virtual class
-    
-vcl.classes = {	
-     Dot:  Base.extend({
-	  	    constructor: function(x, y, width, height) {
-		    this.x = x;
-		    this.y = y;
-		    this.width = width;
-		    this.height = height;
-		  },
-		  x: this.x,
-		  y: this.y,
-		  draw: function(context) {
-		    context.fillRect(this.x, this.y, this.width, this.height);    
-		  },
-		  clear: function(context) {
-		    context.clearRect(this.x, this.y, this.width, this.height);  
-		  },
-		  code: function(size) {
-		    var code = "fillRect(" 
-		    	+ (this.x / size) + ", " 
-		    	+ (this.y / size) + ", "
-		    	+ (this.width / size) + ", "
-		    	+ (this.height / size)
-		    	+ ");";
-		    return code;
-		  }
-		}),
-    
-	 Canvas: Base.extend({
-		constructor: function(width, height) {
-		  this.width = width;
-		  this.height = height;
-		  this.dots = [];
-		},
-		
-	    drawDot: function(dot) {
-	      var insert = true;
-	      var i; 
-	      for (i = 0; i<this.dots.length; i++) {
-	        if (this.dots[i].x === dot.x && this.dots[i].y === dot.y) {
-	          insert = false;
-	          break;
-	        }   	  
-	      }
-	      if (insert) {
-	        this.dots.push(dot);
-	      } else {
-	        this.dots.splice(i,1);   	  
-	      }	      
-	      return insert;
-	    },
-	    
-	    getCode: function(size) {
-	       var code = "function (context, x, y) {\n";
-	       code += "  context.translate(x, y); \n";
-	       for(var i=0; i<this.dots.length;i++) {
-	         code += "  " + "context." + this.dots[i].code(size);
-	         code += "\n";
-	       };
-	       code += "}";
-	       return code;
-	     }
-	 })
-};
+      x: this.x,
+      y: this.y,
 
-window.brush = vcl;
+      draw: function(context) {
+        context.fillRect(this.x, this.y, this.width, this.height);    
+      },
 
+      clear: function(context) {
+        context.clearRect(this.x, this.y, this.width, this.height);  
+      },
+
+      code: function(size) {
+        var code = "fillRect("; 
+        code =+ (this.x / size) + ", "; 
+        code =+ (this.y / size) + ", ";
+        code =+ (this.width / size) + ", ";
+        code =+ (this.height / size);
+        code =+ ");";
+        return code;
+      }
+    }),
+
+    Canvas: Base.extend({
+      constructor: function(width, height) {
+        this.width = width;
+        this.height = height;
+        this.dots = [];
+      },
+
+      drawDot: function(dot) {
+        var insert = true;
+        var i; 
+        for (i = 0; i<this.dots.length; i++) {
+          if (this.dots[i].x === dot.x && this.dots[i].y === dot.y) {
+            insert = false;
+            break;
+          }   	  
+        }
+        if (insert) {
+          this.dots.push(dot);
+        } else {
+          this.dots.splice(i,1);   	  
+        }	      
+        return insert;
+      },
+
+      getCode: function(size) {
+        var code = "function (context, x, y) {\n";
+        code += "  context.translate(x, y); \n";
+        for(var i=0; i<this.dots.length;i++) {
+          code += "  " + "context." + this.dots[i].code(size);
+          code += "\n";
+        };
+        code += "}";
+        return code;
+      }
+    })
+  };
+  window.brush = vcl;
 }) ();
