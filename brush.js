@@ -1,34 +1,32 @@
 (function (window) {
    var Dot = brush.figures.Dot;
    var Canvas = brush.figures.VirtualCanvas;	
-   var document = window.document,
+   var Grid = brush.utils.Grid;
+
    canvas = document.getElementById('brush'),
+   gridCanvas = document.getElementById('grid'),
    context = canvas.getContext('2d'),
    form = document.getElementById('generateForm'),
 
-   gridCanvas = document.getElementById('grid');
-   grid = new brush.utils.Grid({
+   grid = new Grid({
      height: canvas.height,
      width: canvas.width,
      dotSize: 10,
-     canvas: gridCanvas,
+     canvas: gridCanvas
    });
-   grid.draw();
-
-   //---------------------------------------------------------	
+   
+   
    var virtualCanvas = new Canvas({
      width: 640, 
      height: 480,
+     init: function () {
+       
+     }
    });
+   
    canvas.addEventListener('click', onMouseClick, false);
 
-   form.dotSize.addEventListener('change', onDotSizeChange, false);
    form.generate.addEventListener('click', onGenerate, false);
-
-   function onDotSizeChange(evt) {
-     form = evt.target.form;
-
-   }
 
    function onGenerate(evt) {
      form = evt.target.form;
@@ -65,6 +63,8 @@
      } else {
        dot.clear(context);
      }
-   }	
+   }
+   
+     grid.draw();
 
 }) (window);
