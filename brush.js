@@ -1,6 +1,6 @@
 (function (window) {
    var Dot = brush.figures.Dot;
-   var Canvas = brush.utils.VirtualCanvas;	
+   var Canvas = brush.collections.VirtualCanvas;	
    var Grid = brush.utils.Grid;
 
    canvas = document.getElementById('brush'),
