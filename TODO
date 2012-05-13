@@ -1,6 +1,10 @@
+ - Migrate the app to use Backbone.
  - Add a palette to switch between diferents figures.
    - Circle
    - Square
    - line
  - Export draw to a file.
  - Import draw from a file.
+
+Known bugs:
+  - You must click twice to draw a square on the first time.

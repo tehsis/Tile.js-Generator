@@ -67,24 +67,17 @@
   };
 
   vcl.utils = {
-    Grid: Base.extend({
-      constructor: function(params) {
-        this.height = params.height;
-        this.width = params.width;
-        this.dotSize = params.dotSize;
-        this.canvas = params.canvas;
-        this.context = this.canvas.getContext('2d');
-      },
-   
+    Grid: Backbone.Model.extend({
       draw: function() {
+       var context = this.get('canvas').getContext('2d:');
        for (var y=0; y<=this.height || y<=this.width; y+= this.dotSize) {
-         this.context.moveTo(0, y);
-         this.context.lineTo(this.width, y);
-         this.context.moveTo(y, 0);
-         this.context.lineTo(y, this.height);
-         this.context.lineWidth = 1;
-         this.context.strokeStyle = "#eae6e6";
-         this.context.stroke();
+         context.moveTo(0, y);
+         context.lineTo(this.get('width'), y);
+         context.moveTo(y, 0);
+         context.lineTo(y, this.get('height'));
+         context.lineWidth = 1;
+         context.strokeStyle = "#eae6e6";
+         context.stroke();
        };		
       },
     })
